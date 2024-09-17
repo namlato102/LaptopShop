@@ -1,0 +1,10 @@
+services:
+  db:
+    container_name: laptop_database
+    image: mysql:5.7.40
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
