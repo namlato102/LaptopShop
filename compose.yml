@@ -1,7 +1,7 @@
 services:
   db:
     container_name: laptop_database
-    image: mysql:5.7.40
+    image: mysql:8.0.39
     restart: always
     environment:
       - MYSQL_DATABASE=${DATABASE_NAME}
