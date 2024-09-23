@@ -24,12 +24,12 @@
         <td>${id}</td>
     </tr>
     <tr>
-        <td>Name :</td>
-        <td>${name}</td>
+        <td>Email :</td>
+        <td>${email}</td>
     </tr>
     <tr>
-        <td>Contact Number :</td>
-        <td>${phone}</td>
+        <td>Name :</td>
+        <td>${name}</td>
     </tr>
 </table>
 </body>

@@ -3,7 +3,7 @@ This is a simple e-commerce website for selling laptops. It is built using Sprin
 
 ## Environment Variables
 
-To run this project, you will need to create env.properties file in folder src/main/resources and add the following environment variables from env.properties.example to your env.properties file
+To run this project, you will need to create .env file and add the following environment variables from .env.example to your .env file
 
 ## Tech Stack
 
