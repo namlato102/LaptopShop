@@ -1,4 +1,4 @@
-package com.namlato.laptopshop.controller;
+package com.namlato.laptopshop.controller.admin;
 
 import java.util.List;
 
