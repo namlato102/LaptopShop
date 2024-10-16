@@ -2,7 +2,9 @@ package com.namlato.laptopshop.service;
 
 import java.util.List;
 
+import com.namlato.laptopshop.domain.Role;
 import com.namlato.laptopshop.domain.User;
+import com.namlato.laptopshop.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 import com.namlato.laptopshop.repository.UserRepository;
 
@@ -10,9 +12,11 @@ import com.namlato.laptopshop.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public void handleSaveUser(User user) {
@@ -33,5 +37,9 @@ public class UserService {
 
     public void deleteUser(long id) {
         this.userRepository.deleteById(id);
+    }
+
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
     }
 }

@@ -2,20 +2,28 @@ package com.namlato.laptopshop.controller.admin;
 
 import java.util.List;
 
+import com.namlato.laptopshop.service.UploadService;
 import com.namlato.laptopshop.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.namlato.laptopshop.domain.User;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -27,16 +35,23 @@ public class UserController {
 
     //create a new user
     //displaying data in the form, and create a model attribute "newUser" to bind the form data to the User object.
-    @RequestMapping("/admin/user/create") // GET
+    @GetMapping("/admin/user/create") // GET
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
     //When the form is submitted, the POST handler is invoked and the form is automatically bound to the "newUser" argument that passed in modelAttribute.
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createdUserPage(@ModelAttribute("newUser") User createdUser) {
+    @PostMapping(value = "/admin/user/create")
+    public String createdUserPage(@ModelAttribute("newUser") User createdUser, @RequestParam("uploadFile") MultipartFile file) {
         //System.out.println("New user from controller: " + createdUser);
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        //encode password
+        String hashPassword = this.passwordEncoder.encode(createdUser.getPassword());
+        createdUser.setAvatar(avatar);
+        createdUser.setPassword(hashPassword);
+        createdUser.setRole(this.userService.getRoleByName(createdUser.getRole().getName()));
+        // save
         this.userService.handleSaveUser(createdUser);
         return "redirect:/admin/user";
     }
