@@ -28,10 +28,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.viewResolver(viewResolver());
     }
 
+    //we need to add the following code to allow Spring to serve static resources such as CSS, JavaScript, and images. exp: "http://localhost:8080/images/avatar/" it will find in resources.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
     }
 
 }
