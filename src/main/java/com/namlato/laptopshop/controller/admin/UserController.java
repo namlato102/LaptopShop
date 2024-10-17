@@ -86,9 +86,9 @@ public class UserController {
 
     @PostMapping("/admin/user/update")
     public String postUpdateUser(@ModelAttribute("currentUser") User currentUser) {
-        //System.out.println("After update user: " + currentUser);
+        //System.out.println("current user: " + currentUser);
         User updatedUser = this.userService.getUserById(currentUser.getId());
-        //System.out.println("Before update user: " + updatedUser);
+        //System.out.println("Updated user: " + updatedUser);
         if (updatedUser != null) {
             updatedUser.setAddress(currentUser.getAddress());
             updatedUser.setFullName(currentUser.getFullName());
