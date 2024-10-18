@@ -13,6 +13,10 @@ import com.namlato.laptopshop.domain.User;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.validation.BindingResult;
+//import org.springframework.validation.FieldError;
+import jakarta.validation.Valid;
+
 @Controller
 public class UserController {
 
@@ -43,8 +47,21 @@ public class UserController {
 
     //When the form is submitted, the POST handler is invoked and the form is automatically bound to the "newUser" argument that passed in modelAttribute.
     @PostMapping(value = "/admin/user/create")
-    public String createdUserPage(@ModelAttribute("newUser") User createdUser, @RequestParam("uploadFile") MultipartFile file) {
+    public String createdUserPage(@ModelAttribute("newUser") @Valid User createdUser,
+                                  BindingResult newUserBindingResult,
+                                  @RequestParam("uploadFile") MultipartFile file) {
         //System.out.println("New user from controller: " + createdUser);
+        //List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        //for (FieldError error : errors) {
+        //    System.out.println(">>>>" + error.getField() + " - " + error.getDefaultMessage());
+        //}
+
+        // validate
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
+        // handle upload file
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         //encode password
         String hashPassword = this.passwordEncoder.encode(createdUser.getPassword());
