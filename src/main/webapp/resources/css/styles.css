@@ -3744,14 +3744,14 @@ textarea.form-control-lg {
     --bs-navbar-brand-color: rgba(0, 0, 0, 0.9);
     --bs-navbar-brand-hover-color: rgba(0, 0, 0, 0.9);
     --bs-navbar-nav-link-padding-x: 0.5rem;
-    --bs-navbar-toggler-padding-y: 0.25rem;
-    --bs-navbar-toggler-padding-x: 0.75rem;
-    --bs-navbar-toggler-font-size: 1.25rem;
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    --bs-navbar-toggler-border-color: rgba(0, 0, 0, 0.1);
-    --bs-navbar-toggler-border-radius: 0.375rem;
-    --bs-navbar-toggler-focus-width: 0.25rem;
-    --bs-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
+    --bs-navbar-toggle-padding-y: 0.25rem;
+    --bs-navbar-toggle-padding-x: 0.75rem;
+    --bs-navbar-toggle-font-size: 1.25rem;
+    --bs-navbar-toggle-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggle-border-color: rgba(0, 0, 0, 0.1);
+    --bs-navbar-toggle-border-radius: 0.375rem;
+    --bs-navbar-toggle-focus-width: 0.25rem;
+    --bs-navbar-toggle-transition: box-shadow 0.15s ease-in-out;
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -3822,36 +3822,36 @@ textarea.form-control-lg {
     align-items: center;
 }
 
-.navbar-toggler {
-    padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
-    font-size: var(--bs-navbar-toggler-font-size);
+.navbar-toggle {
+    padding: var(--bs-navbar-toggle-padding-y) var(--bs-navbar-toggle-padding-x);
+    font-size: var(--bs-navbar-toggle-font-size);
     line-height: 1;
     color: var(--bs-navbar-color);
     background-color: transparent;
-    border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color);
-    border-radius: var(--bs-navbar-toggler-border-radius);
-    transition: var(--bs-navbar-toggler-transition);
+    border: var(--bs-border-width) solid var(--bs-navbar-toggle-border-color);
+    border-radius: var(--bs-navbar-toggle-border-radius);
+    transition: var(--bs-navbar-toggle-transition);
 }
 @media (prefers-reduced-motion: reduce) {
-    .navbar-toggler {
+    .navbar-toggle {
         transition: none;
     }
 }
-.navbar-toggler:hover {
+.navbar-toggle:hover {
     text-decoration: none;
 }
-.navbar-toggler:focus {
+.navbar-toggle:focus {
     text-decoration: none;
     outline: 0;
-    box-shadow: 0 0 0 var(--bs-navbar-toggler-focus-width);
+    box-shadow: 0 0 0 var(--bs-navbar-toggle-focus-width);
 }
 
-.navbar-toggler-icon {
+.navbar-toggle-icon {
     display: inline-block;
     width: 1.5em;
     height: 1.5em;
     vertical-align: middle;
-    background-image: var(--bs-navbar-toggler-icon-bg);
+    background-image: var(--bs-navbar-toggle-icon-bg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -3884,7 +3884,7 @@ textarea.form-control-lg {
         display: flex !important;
         flex-basis: auto;
     }
-    .navbar-expand-sm .navbar-toggler {
+    .navbar-expand-sm .navbar-toggle {
         display: none;
     }
     .navbar-expand-sm .offcanvas {
@@ -3931,7 +3931,7 @@ textarea.form-control-lg {
         display: flex !important;
         flex-basis: auto;
     }
-    .navbar-expand-md .navbar-toggler {
+    .navbar-expand-md .navbar-toggle {
         display: none;
     }
     .navbar-expand-md .offcanvas {
@@ -3978,7 +3978,7 @@ textarea.form-control-lg {
         display: flex !important;
         flex-basis: auto;
     }
-    .navbar-expand-lg .navbar-toggler {
+    .navbar-expand-lg .navbar-toggle {
         display: none;
     }
     .navbar-expand-lg .offcanvas {
@@ -4025,7 +4025,7 @@ textarea.form-control-lg {
         display: flex !important;
         flex-basis: auto;
     }
-    .navbar-expand-xl .navbar-toggler {
+    .navbar-expand-xl .navbar-toggle {
         display: none;
     }
     .navbar-expand-xl .offcanvas {
@@ -4072,7 +4072,7 @@ textarea.form-control-lg {
         display: flex !important;
         flex-basis: auto;
     }
-    .navbar-expand-xxl .navbar-toggler {
+    .navbar-expand-xxl .navbar-toggle {
         display: none;
     }
     .navbar-expand-xxl .offcanvas {
@@ -4118,7 +4118,7 @@ textarea.form-control-lg {
     display: flex !important;
     flex-basis: auto;
 }
-.navbar-expand .navbar-toggler {
+.navbar-expand .navbar-toggle {
     display: none;
 }
 .navbar-expand .offcanvas {
@@ -4150,8 +4150,8 @@ textarea.form-control-lg {
     --bs-navbar-active-color: #fff;
     --bs-navbar-brand-color: #fff;
     --bs-navbar-brand-hover-color: #fff;
-    --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1);
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggle-border-color: rgba(255, 255, 255, 0.1);
+    --bs-navbar-toggle-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .card {
