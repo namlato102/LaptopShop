@@ -8,8 +8,10 @@ import com.namlato.laptopshop.domain.Product;
 
 import com.namlato.laptopshop.service.UserService;
 import com.namlato.laptopshop.domain.User;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,7 +44,13 @@ public class HomePageController {
     }
 
     @PostMapping("/register")
-    public String handleRegister(@ModelAttribute("registerUser") RegisterDTO registerDTO) {
+    public String handleRegister(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
+                                 BindingResult bindingResult) {
+        // validate
+        if (bindingResult.hasErrors()) {
+            return "client/auth/register";
+        }
+
         // convert RegisterDTO to User
         User registeredUser = this.userService.registerDTOtoUser(registerDTO);
         String hashPassword = this.passwordEncoder.encode(registeredUser.getPassword());
