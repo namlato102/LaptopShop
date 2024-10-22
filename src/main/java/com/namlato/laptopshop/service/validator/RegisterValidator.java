@@ -20,6 +20,15 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
     public boolean isValid(RegisterDTO user, ConstraintValidatorContext context) {
         boolean valid = true;
 
+        // Check if password is at least 8 characters long
+        if(user.getPassword().length()<8){
+            context.buildConstraintViolationWithTemplate("Mật khẩu phải có ít nhất 8 ký tự")
+                    .addPropertyNode("password")
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+            valid = false;
+        }
+
         // Check if password fields match
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             context.buildConstraintViolationWithTemplate("Passwords nhập không chính xác")
@@ -29,7 +38,6 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
             valid = false;
         }
 
-        // Additional validations can be added here
         // check email
         if (this.userService.checkEmailExist(user.getEmail())) {
             context.buildConstraintViolationWithTemplate("Email đã tồn tại")
