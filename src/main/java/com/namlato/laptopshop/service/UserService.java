@@ -7,6 +7,7 @@ import com.namlato.laptopshop.domain.User;
 import com.namlato.laptopshop.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 import com.namlato.laptopshop.repository.UserRepository;
+import com.namlato.laptopshop.domain.dto.RegisterDTO;
 
 @Service
 public class UserService {
@@ -41,5 +42,14 @@ public class UserService {
 
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    // act as Mapper to convert RegisterDTO to User
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
     }
 }
