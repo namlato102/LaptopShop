@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
     // Spinner
-    var spinner = function () {
+    const spinner = function () {
         setTimeout(function () {
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
@@ -60,38 +60,36 @@
         })
     });
 
-    // Product Quantity
-    // $('.quantity button').on('click', function () {
-    //     var button = $(this);
-    //     var oldValue = button.parent().parent().find('input').val();
-    //     if (button.hasClass('btn-plus')) {
-    //         var newVal = parseFloat(oldValue) + 1;
-    //     } else {
-    //         if (oldValue > 0) {
-    //             var newVal = parseFloat(oldValue) - 1;
-    //         } else {
-    //             newVal = 0;
-    //         }
-    //     }
-    //     button.parent().parent().find('input').val(newVal);
-    // });
     $('.quantity button').on('click', function () {
         let change = 0;
         let newVal;
         const button = $(this);
         const oldValue = button.parent().parent().find('input').val();
+        /**
+         * Adjusts the quantity value based on the button clicked (plus or minus).
+         * If the plus button is clicked, the quantity is increased by 1.
+         * If the minus button is clicked, the quantity is decreased by 1, but not below 1.
+         *
+         * @param {jQuery} button - The button that was clicked.
+         * @param {number} oldValue - The current quantity value.
+         * @returns {number} newVal - The new quantity value.
+         */
         if (button.hasClass('btn-plus')) {
             newVal = parseFloat(oldValue) + 1;
             change = 1;
         } else {
             if (oldValue > 1) {
                 newVal = parseFloat(oldValue) - 1;
+                change = -1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
+
+        //update input value
         const input = button.parent().parent().find('input');
         input.val(newVal);
+
         //get price
         const price = input.attr("data-cart-detail-price");
         const id = input.attr("data-cart-detail-id");
@@ -100,6 +98,7 @@
             const newPrice = +price * newVal;
             priceElement.text(formatCurrency(newPrice.toFixed(2)) + " đ");
         }
+
         //update total cart price
         const totalPriceElement = $(`p[data-cart-total-price]`);
         if (totalPriceElement && totalPriceElement.length) {
