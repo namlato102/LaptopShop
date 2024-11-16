@@ -3,6 +3,7 @@ package com.namlato.laptopshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.namlato.laptopshop.domain.User;
 import org.springframework.stereotype.Service;
 
 import com.namlato.laptopshop.domain.Order;
@@ -51,5 +52,9 @@ public class OrderService {
             currentOrder.setStatus(order.getStatus());
             this.orderRepository.save(currentOrder);
         }
+    }
+
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }

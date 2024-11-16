@@ -4,17 +4,17 @@
 <div class="container-fluid fixed-top">
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="/" class="navbar-brand">
-                <h1 class="text-primary display-6">Laptop Shop</h1>
-            </a>
-            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars text-primary"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-white justify-content-between mx-5" id="navbarCollapse">
+            <div class="collapse navbar-collapse bg-white justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link active">Trang Chủ</a>
-                    <a href="/products" class="nav-item nav-link">Sản Phẩm</a>
+                    <a href="/" class="navbar-brand">
+                        <h1 class="text-primary display-6">Laptop Shop</h1>
+                    </a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <%--<a href="/" class="nav-item nav-link active">Trang Chủ</a>--%>
+                    <%--<a href="/products" class="nav-item nav-link">Sản Phẩm</a>--%>
                 </div>
                 <div class="d-flex m-3 me-0">
                     <c:if test="${not empty pageContext.request.userPrincipal}">
@@ -41,7 +41,7 @@
                                 </li>
                                 <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
 
-                                <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
+                                <li><a class="dropdown-item" href="/order-history">Lịch sử mua hàng</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
