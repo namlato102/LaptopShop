@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,6 +32,7 @@
         <!-- Template Stylesheet -->
         <link href="/client/css/style.css" rel="stylesheet">
     </head>
+
     <body>
         <!-- Spinner Start -->
         <div id="spinner"
@@ -49,7 +51,9 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chi Tiết Sản Phẩm</li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Chi Tiết Sản Phẩm
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -58,8 +62,7 @@
                             <div class="col-lg-6">
                                 <div class="border rounded">
                                     <a href="#">
-                                        <img src="/images/product/${product.image}" class="img-fluid rounded"
-                                             alt="Image">
+                                        <img src="/images/product/${product.image}" class="img-fluid rounded" alt="Image">
                                     </a>
                                 </div>
                             </div>
@@ -67,7 +70,7 @@
                                 <h4 class="fw-bold mb-3"> ${product.name}</h4>
                                 <p class="mb-3">${product.factory}</p>
                                 <h5 class="fw-bold mb-3">
-                                    <fmt:formatNumber type="number" value="${product.price}" /> €
+                                    <fmt:formatNumber type="number" value="${product.price}" /> đ
                                 </h5>
                                 <div class="d-flex mb-4">
                                     <i class="fa fa-star text-secondary"></i>
@@ -85,17 +88,26 @@
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                           value="1">
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1"
+                                           data-cart-detail-index="0">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <a href="#"
-                                   class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <form action="/add-product-from-view-detail" method="post" modelAttribute="product">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                                    <input class="form-control d-none" type="text" value="${product.id}" name="id" />
+
+                                    <input class="form-control d-none" type="text" name="quantity" id="cartDetails0.quantity" />
+
+                                    <button class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                            class="fa fa-shopping-bag me-2 text-primary"></i>
+                                        Add to cart
+                                    </button>
+                                </form>
                             </div>
                             <div class="col-lg-12">
                                 <nav>
@@ -113,48 +125,6 @@
                                             ${product.detailDesc}
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3">
-                        <div class="row g-4 laptop">
-                            <div class="col-lg-12">
-
-                                <div class="mb-4">
-                                    <h4>Categories</h4>
-                                    <ul class="list-unstyled laptop-category">
-                                        <li>
-                                            <div class="d-flex justify-content-between laptop-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                <span>(3)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between laptop-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Dell</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between laptop-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Asus</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between laptop-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Acer</a>
-                                                <span>(8)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between laptop-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Lenovo</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>

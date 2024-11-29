@@ -2,12 +2,16 @@ package com.namlato.laptopshop.controller.client;
 
 import java.util.List;
 
+import com.namlato.laptopshop.domain.Order;
 import com.namlato.laptopshop.domain.dto.RegisterDTO;
+import com.namlato.laptopshop.service.OrderService;
 import com.namlato.laptopshop.service.ProductService;
 import com.namlato.laptopshop.domain.Product;
 
 import com.namlato.laptopshop.service.UserService;
 import com.namlato.laptopshop.domain.User;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,11 +27,16 @@ public class HomePageController {
     private final ProductService productService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final OrderService orderService;
 
-    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
+    public HomePageController(ProductService productService,
+                              UserService userService,
+                              PasswordEncoder passwordEncoder,
+                              OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -71,5 +80,16 @@ public class HomePageController {
     public String getDenyPage(Model model) {
 
         return "client/auth/deny";
+    }
+
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        User currentUser = new User();// null
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+        List<Order> orders = this.orderService.fetchOrderByUser(currentUser);
+        model.addAttribute("orders", orders);
+        return "client/cart/order-history";
     }
 }
