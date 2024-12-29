@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.namlato.laptopshop.repository.UserRepository;
 import com.namlato.laptopshop.domain.dto.RegisterDTO;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Service
 public class UserService {
 
@@ -33,8 +36,8 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUsers(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 
     public List<User> getAllUsersByEmail(String email) {

@@ -11,6 +11,9 @@ import com.namlato.laptopshop.domain.OrderDetail;
 import com.namlato.laptopshop.repository.OrderDetailRepository;
 import com.namlato.laptopshop.repository.OrderRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -23,8 +26,8 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> fetchAllOrders() {
-        return this.orderRepository.findAll();
+    public Page<Order> fetchAllOrders(Pageable page) {
+        return this.orderRepository.findAll(page);
     }
 
     public Optional<Order> fetchOrderById(long id) {
