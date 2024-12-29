@@ -1,7 +1,11 @@
 package com.namlato.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import com.namlato.laptopshop.service.UploadService;
 import com.namlato.laptopshop.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -76,9 +80,24 @@ public class UserController {
     //display all users
     //using model attribute "users" to bind the data to the view.
     @RequestMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.getAllUsers();
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        // pass page parameter to url, default page = 1
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // page = 1
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 1);
+        Page<User> usersPage = this.userService.getAllUsers(pageable);
+        List<User> users = usersPage.getContent();
         model.addAttribute("users", users);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usersPage.getTotalPages());
         return "admin/user/users";
     }
 
