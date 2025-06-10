@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime and Maven
-FROM openjdk:17-jdk-slim as build
+FROM maven:3.8.4-openjdk-17 AS build
 
 # Copy the project files into the container
 COPY src /laptopshop/spring-mvc/src
