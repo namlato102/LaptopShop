@@ -150,6 +150,7 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request) {
+        //query param will be transformed to ProductCriteriaDTO by Spring automatically
         int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
