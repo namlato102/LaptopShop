@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `laptopshop` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `laptop-database` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `laptop-database`;
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
@@ -60,3 +60,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-03-22 12:37:00
+
+INSERT INTO `roles` (name, description)
+VALUES ('ADMIN', 'Quản trị viên hệ thống'),
+       ('USER', 'Người dùng hệ thống');
